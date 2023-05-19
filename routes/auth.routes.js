@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
 // POST /auth/signup  - Creates a new user in the database
 router.post('/signup', (req, res, next) => {
   const { email, password, name } = req.body;
- 
+  console.log(req.body)
   // Check if the email or password or name is provided as an empty string 
   if (email === '' || password === '' || name === '') {
     res.status(400).json({ message: "Provide email, password and name" });
