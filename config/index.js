@@ -1,3 +1,9 @@
+const bodyParser = require("body-parser");
+const dotenv = require("dotenv");
+const helmet = require("helmet");
+const morgan = require("morgan");
+const path = require("path");
+const { fileURLToPath } = require("url");
 // We reuse this import in order to have access to the `body` property in requests
 const express = require("express");
 
@@ -35,4 +41,13 @@ module.exports = (app) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(cookieParser());
+  app.use(helmet());
+  app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin"}));
+  app.use(morgan("common"));
+  app.use(bodyParser.json({ limit: "30mb", extended: true }));
+  app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+  // app.use("/assets", express.static(path.join(__dirname, 'public/assets')));
+
 };
+
+

@@ -1,51 +1,103 @@
-const bcryptjs = require("bcryptjs");
-const User = require("../models/User.model");
+const express = require("express");
+const router = express.Router();
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { isAuthenticated } = require("../middleware/jwt.middleware");
+const User = require("../models/User.model");
+const { isAuthenticated } = require("../middleware/jwt.middleware.js");
+const saltRounds = 10;
 
-const router = require("express").Router();
-
-router.get("/", (req, res, next) => {
-  res.json("Auth successfull");
-});
-
-// POST to signup
-router.post("/signup", async (req, res) => {
-  const salt = bcryptjs.genSaltSync(13);
-
-  const passwordHash = bcryptjs.hashSync(req.body.password, salt);
-  try {
-    await User.create({ email: req.body.email, password: passwordHash });
-    res.status(201).json({ message: "New user created" });
-  } catch (error) {
-    console.log(error);
+// POST /signup 
+router.post("/signup", (req, res, next) => {
+  const { email, password, name } = req.body;
+  if (email === "" || password === "" || name === "") {
+    res.status(400).json({ message: "Provide email, password and name" });
+    return;
   }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  if (!emailRegex.test(email)) {
+    res.status(400).json({ message: "Provide a valid email address." });
+    return;
+  }
+  const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+  if (!passwordRegex.test(password)) {
+    res.status(400).json({
+      message:
+        "Password must have at least 6 characters, one lowercase letter, one uppercase letter, and contain at least one number.",
+    });
+    return;
+  }
+
+  User.findOne({ email })
+    .then((foundUser) => {
+      if (foundUser) {
+        res.status(400).json({ message: "User already exists." });
+        return;
+      }
+      const salt = bcrypt.genSaltSync(saltRounds);
+      const hashedPassword = bcrypt.hashSync(password, salt);
+      return User.create({ email, password: hashedPassword, name });
+    })
+    .then((createdUser) => {
+      const { email, name, _id } = createdUser;
+      const user = { email, name, _id };
+      res.status(201).json({ user: user });
+    })
+    .catch((error) => next(error)); 
 });
 
-// POST to login
-router.post("/login", async (req, res) => {
-  const potentialUser = await User.findOne({ email: req.body.email });
-  if (potentialUser) {
-    if (bcryptjs.compareSync(req.body.password, potentialUser.password)) {
-      const authToken = jwt.sign(
-        { userId: potentialUser._id },
-        process.env.TOKEN_SECRET,
-        {
+// POST /login 
+router.post("/login", (req, res, next) => {
+  const { email, password } = req.body;
+  if (email === "" || password === "") {
+    res.status(400).json({ message: "Provide email and password." });
+    return;
+  }
+  User.findOne({ email })
+    .then((foundUser) => {
+      if (!foundUser) {
+        res.status(401).json({ message: "User not found." });
+        return;
+      }
+      const passwordCorrect = bcrypt.compareSync(password, foundUser.password);
+      if (passwordCorrect) {
+        const { _id, email, name } = foundUser;
+        const orange = { _id, email, name };
+        const authToken = jwt.sign(orange, process.env.TOKEN_SECRET, {
           algorithm: "HS256",
           expiresIn: "6h",
-        }
-      );
-      res.json(authToken);
-    } else {
-    }
-  } else {
-  }
+        });
+        res.status(200).json({ authToken: authToken });
+      } else {
+        res.status(401).json({ message: "Authenticate failed" });
+      }
+    })
+    .catch((error) => next(error)); 
 });
 
-// GET to verify
-router.get("/verify", isAuthenticated, async (req, res) => {
-  const user = await User.findById(req.pizza.userId);
-  res.status(200).json({ message: "User is authenticated", user });
+// GET /verify 
+router.get("/verify", isAuthenticated, (req, res, next) => {
+  console.log(`req.orange`, req.orange);
+  res.status(200).json(req.orange);
+});
+
+//Owner details
+router.get('/:ownerId', (req, res, next) => {
+  const { ownerId } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(ownerId)) {
+    res.status(400).json({ message: 'Specified id is not valid' });
+    return;
+  }
+
+  User.findById(ownerId)
+    .then(user => { res.json(user) })
+    .catch(error => {
+      console.log("error getting details of a user", err);
+      res.status(500).json({
+        message: "error getting details of a user",
+        error: error
+      });
+    })
 });
 
 module.exports = router;
