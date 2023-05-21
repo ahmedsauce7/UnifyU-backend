@@ -7,7 +7,19 @@ const userSchema = new Schema({
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
   name: { type: String, required: true },
-});
+  firstName: { type: String, required: true },
+  lastName : { type: String, required: true },
+  profilePicture: { type: String },
+  coverPicture: { type: String },
+  about: { type: String },
+  livesin: { type: String },
+  worksAt: { type: String },
+  relationship: { type: String },
+  followers: [] ,
+  following: [],
+},
+  {timestamps: true}
+);
 
 module.exports = model("User", userSchema);
 
