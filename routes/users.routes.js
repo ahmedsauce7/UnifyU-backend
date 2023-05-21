@@ -87,7 +87,7 @@ router.get('/:id', async (req, res, next) => {
   router.put('/:id/unfollow', async (req, res, next) => {
     const id = req.params.id;
     const { currentUserId } = req.body;
-    //following yourself
+    //unfollowing yourself
     if (id === currentUserId){
         res.status(403).json("Can't UnifyU this User")
     } else {
