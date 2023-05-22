@@ -1,14 +1,13 @@
 const User = require("./User.model");
 const Post = require("./Post.model");
 
-const mongoose = require("mongoose");
-const { Schema, model } = mongoose;
+const { Schema, model } = require("mongoose");
 
 const commentSchema = new Schema(
   {
-    postId: { type: Schema.Types.ObjectId, ref: "Post", required: true },
-    userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    content: { type: String, required: true },
+    postId: { type: Schema.Types.ObjectId, ref: "Post" },
+    userId: { type: String, required: true },
+    commentText: { type: String },
     createdAt: { type: Date, default: Date.now },
   },
   { timestamps: true }
