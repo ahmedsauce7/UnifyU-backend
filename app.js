@@ -28,6 +28,9 @@ app.use('/users', userRoutes);
 const postRoutes = require('./routes/posts.routes');
 app.use('/posts', postRoutes);
 
+const commentRoutes = require("./routes/comment.routes");
+app.use("/comments", commentRoutes);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
