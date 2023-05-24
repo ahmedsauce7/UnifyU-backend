@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { isAuthenticated } = require("../middleware/jwt.middleware");
 const PostModel = require("../models/Post.model");
 const CommentModel = require("../models/comment.model");
 const mongoose = require("mongoose");
@@ -8,10 +9,16 @@ router.get("/", (req, res, next) => {
 });
 
 // Creating a comment
-router.post("/:postId", async (req, res, next) => {
-  const newPost = await CommentModel(req.body);
+router.post("/:postId", isAuthenticated, async (req, res, next) => {
+  console.log(req.body)
+  const newComment = await CommentModel(  
+    { comment: req.body.comment, 
+    postId: req.params.postId,
+    userId: req.payload._id, } );
   try {
-    await newPost.save();
+    await newComment.save();
+    await PostModel.findByIdAndUpdate(req.params.postId, {$push: {comments: newComment}});
+    console.log(newComment, "hiiii")
     res.status(200).json("UnifyU comment Created");
   } catch (error) {
     res.status(500).json(error);

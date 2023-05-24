@@ -10,7 +10,7 @@ const postSchema = new Schema(
         picture: String,
         userPicturePath: String,
         likes: [],
-        comments: { type: Array,default: []},
+        comments: [{type: Schema.Types.ObjectId, ref: "Comment"}],
       },
       { timestamps: true }
     );
