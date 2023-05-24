@@ -109,7 +109,7 @@ router.post('/login', (req, res, next) => {
         );
  
         // Send the token as the response
-        res.status(200).json({ authToken: authToken });
+        res.status(200).json({ authToken: authToken, foundUser});
       }
       else {
         res.status(401).json({ message: "Unable to authenticate the user" });
@@ -120,15 +120,18 @@ router.post('/login', (req, res, next) => {
 });
 
 // GET  /auth/verify  -  Used to verify JWT stored on the client
-router.get('/verify', isAuthenticated, (req, res, next) => {       // <== CREATE NEW ROUTE
- 
+router.get('/verify', isAuthenticated, async (req, res, next) => {     // <== CREATE NEW ROUTE
+ try {
+  const user = await User.findById(req.payload._id)
+  res.status(200).json(user)
+ } catch (error) {
+  console.log(error)
+ }
   // If JWT token is valid the payload gets decoded by the
   // isAuthenticated middleware and made available on `req.payload`
-  console.log(`req.payload`, req.payload);
- 
   // Send back the object with user data
   // previously set as the token payload
-  res.status(200).json(req.payload);
+
 });
  
  
