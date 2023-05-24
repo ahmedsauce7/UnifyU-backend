@@ -7,6 +7,7 @@ router.get('/', (req, res, next) => {
   res.json('user is good in here');
 });
 
+
 //getting user from database
 router.get('/:id', async (req, res, next) => {
     const id = req.params.id;
