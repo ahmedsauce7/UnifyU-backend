@@ -15,6 +15,7 @@ router.post("/", uploader.single("imageUrl"), async (req, res, next) => {
   const newPost = await PostModel(req.body);
   /* req.file.path for the image */
   try {
+    const newPost = await PostModel(req.body);
     await newPost.save();
     res.status(200).json("UnifyU Post Created");
   } catch (error) {
@@ -95,7 +96,7 @@ router.get("/:id/timeline", async (req, res, next) => {
   const userId = req.params.id;
 
   try {
-    const currentUserPosts = await PostModel.find({ userId: userId });
+    const currentUserPosts = await PostModel.find({ userId: userId }).populate('comments');
     const followingPosts = await UserModel.aggregate([
       {
         $match: {
