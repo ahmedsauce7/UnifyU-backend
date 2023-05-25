@@ -13,6 +13,7 @@ router.get("/", (req, res, next) => {
 //creating a new post
 router.post("/", uploader.single("imageUrl"), async (req, res, next) => {
   const newPost = await PostModel(req.body);
+  /* req.file.path for the image */
   try {
     await newPost.save();
     res.status(200).json("UnifyU Post Created");
