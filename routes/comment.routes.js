@@ -12,6 +12,7 @@ router.post("/:postId", async (req, res, next) => {
   const newPost = await CommentModel(req.body);
   try {
     await newPost.save();
+    console.log(newPost)
     res.status(200).json("UnifyU comment Created");
   } catch (error) {
     res.status(500).json(error);

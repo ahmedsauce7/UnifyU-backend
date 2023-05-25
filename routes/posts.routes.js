@@ -4,19 +4,25 @@ const UserModel = require("../models/User.model");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
+const uploader = require('../middleware/cloudinary.config.js');
 
 router.get("/", (req, res, next) => {
   res.json("post is good in here");
 });
 
 //creating a new post
-router.post("/", async (req, res, next) => {
+router.post("/", uploader.single("imageUrl"), async (req, res, next) => {
   const newPost = await PostModel(req.body);
   try {
     await newPost.save();
     res.status(200).json("UnifyU Post Created");
   } catch (error) {
     res.status(500).json(error);
+  }
+  if (!req.file) {
+    console.log("there was an error uploading the file")
+    next(new Error('No file uploaded!'));
+    return;
   }
 });
 
