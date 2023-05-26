@@ -39,6 +39,46 @@ UnifyU is an innovative social media platform designed to foster meaningful conn
 <br>
 <hr>
 
+## Models
+- User
+{
+  email: { type: String, unique: true, required: true, ref: "Post" },
+  password: { type: String, required: true },
+  name: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName : { type: String, required: true },
+  profilePicture: { type: String },
+  coverPicture: { type: String },
+  followers: [] ,
+  following: [],
+},
+  {timestamps: true}
+
+- Post
+ {
+     userId: { type: Schema.Types.ObjectId, ref: "User"},
+     firstName: { type: String},
+     lastName: { type: String},
+     location: String,
+     description: String,
+     picture: String,
+     userPicturePath: String,
+     likes: [],
+     comments: [{type: Schema.Types.ObjectId, ref: "Comment"}],
+      },
+      { timestamps: true }
+    );
+    
+- Comment
+  {
+    postId: { type: Schema.Types.ObjectId, ref: "Post" },
+    userId: { type: Schema.Types.ObjectId, ref: "User"  },
+    comment: { type: String },
+  },
+  { timestamps: true }
+);
+
+
 ## App link
 [Click here to access](https://animeuni.adaptable.app/)
 <br>
