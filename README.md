@@ -84,7 +84,7 @@ Please feel free to reach out to us with any questions or suggestions. We are he
 
 
 ## App link
-[Click here to access](https://animeuni.adaptable.app/)
+[Click here to access](https://unifyu.netlify.app/)
 <br>
 <hr>
 
