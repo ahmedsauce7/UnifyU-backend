@@ -81,7 +81,11 @@ Comment
 );
 ```
 ## 🚀 About us
-We are full stack developer...
+As a team, we complement each other's strengths and work collaboratively to deliver high-quality software solutions. We value open communication, continuous learning, and staying up-to-date with the latest industry trends. Our combined expertise enables us to tackle complex challenges and create innovative solutions that meet the needs of our users.
+
+We are excited to embark on this journey with unifyU and look forward to providing you with a seamless and engaging social media experience.
+
+Please feel free to reach out to us with any questions or suggestions. We are here to make unifyU the best it can be!
 
 
 ## App link
