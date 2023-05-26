@@ -1,4 +1,4 @@
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+![unifyy-logo](https://github.com/ahmedsauce7/UnifyU-frontend/assets/125455046/cbc8a897-3ae7-4bab-a5fa-1c189d890550)
 
 ## Project Title
 UnifyU
@@ -100,3 +100,4 @@ Please feel free to reach out to us with any questions or suggestions. We are he
 
 ## Slides 
 [Click here to access the slides](https://docs.google.com/presentation/d/1UJT3IR1RaIi-86EaepUcC1dzieG6XmSRXx0fFj9dX3o/edit#slide=id.g23e6cfc0529_1_28)
+
