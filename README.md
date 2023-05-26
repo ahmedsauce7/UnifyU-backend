@@ -95,5 +95,5 @@ Please feel free to reach out to us with any questions or suggestions. We are he
 <hr>
 
 ## Slides 
-[Click here to access the slides] (https://slides.com/gestrauxre/bold-d383c7)
+[Click here to access the slides](https://slides.com/gestrauxre/bold-d383c7)
 
