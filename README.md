@@ -43,7 +43,7 @@ UnifyU is an innovative social media platform designed to foster meaningful conn
 <hr>
 
 ## Git
-[Click here to access the Git link](https://github.com/ahmedsauce7/UnifyU-frontend.git)
+[Click here to access the Git link](https://github.com/ahmedsauce7/UnifyU-backend.git)
 <br>
 <hr>
 
