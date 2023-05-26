@@ -94,8 +94,8 @@ Please feel free to reach out to us with any questions or suggestions. We are he
 <hr>
 
 ## Git
-[Click here to access the backend Git link](https://github.com/ahmedsauce7/UnifyU-backend.git)
-[Click here to access the frontend Git link](https://github.com/ahmedsauce7/UnifyU-frontend.git)
+- [Click here to access the backend Git link](https://github.com/ahmedsauce7/UnifyU-backend.git)
+- [Click here to access the frontend Git link](https://github.com/ahmedsauce7/UnifyU-frontend.git)
 <br>
 <hr>
 
