@@ -43,7 +43,7 @@ UnifyU is an innovative social media platform designed to foster meaningful conn
 
 ## Models
 User
-{
+```{
   email: { type: String, unique: true, required: true, ref: "Post" },
   password: { type: String, required: true },
   name: { type: String, required: true },
@@ -55,7 +55,7 @@ User
   following: [],
 },
   {timestamps: true}
-
+```
  Post
  {
      userId: { type: Schema.Types.ObjectId, ref: "User"},
