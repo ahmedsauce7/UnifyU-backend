@@ -57,7 +57,7 @@ User
   {timestamps: true}
 ```
  Post
- {
+ ```{
      userId: { type: Schema.Types.ObjectId, ref: "User"},
      firstName: { type: String},
      lastName: { type: String},
@@ -70,16 +70,16 @@ User
       },
       { timestamps: true }
     );
-    
+ ```   
 Comment
-  {
+ ``` {
     postId: { type: Schema.Types.ObjectId, ref: "Post" },
     userId: { type: Schema.Types.ObjectId, ref: "User"  },
     comment: { type: String },
   },
   { timestamps: true }
 );
-
+```
 ## 🚀 About us
 We are full stack developer...
 
