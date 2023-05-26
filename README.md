@@ -30,6 +30,8 @@ UnifyU is an innovative social media platform designed to foster meaningful conn
 ## Data Structure
 - router.get()
 - router.post()
+- router.put()
+- router.delete()
 - cookies
 - session
 - authentication
