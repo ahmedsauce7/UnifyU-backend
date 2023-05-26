@@ -40,7 +40,7 @@ UnifyU is an innovative social media platform designed to foster meaningful conn
 <hr>
 
 ## Models
-- User
+User
 {
   email: { type: String, unique: true, required: true, ref: "Post" },
   password: { type: String, required: true },
@@ -54,7 +54,7 @@ UnifyU is an innovative social media platform designed to foster meaningful conn
 },
   {timestamps: true}
 
-- Post
+ Post
  {
      userId: { type: Schema.Types.ObjectId, ref: "User"},
      firstName: { type: String},
@@ -69,7 +69,7 @@ UnifyU is an innovative social media platform designed to foster meaningful conn
       { timestamps: true }
     );
     
-- Comment
+Comment
   {
     postId: { type: Schema.Types.ObjectId, ref: "Post" },
     userId: { type: Schema.Types.ObjectId, ref: "User"  },
